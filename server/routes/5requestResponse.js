@@ -1,6 +1,5 @@
 const express = require('express')
-const app = express()
-const port = 8004
+const router = express.Router()
 const HttpStatus = require('../utils/httpStatus')
 
 //mock data
@@ -18,16 +17,16 @@ const users = [
 ]
 
 //middleware read body (json)
-app.use(express.json())
+router.use(express.json())
 
 //res.send -> test server
-app.get('/ping', (req, res) => {
+router.get('/ping', (req, res) => {
     res.send('pong pong')
 })
 
 // req.params -> get id
 // res.json 
-app.get('/users/:id', (req, res) => {
+router.get('/users/:id', (req, res) => {
     const id = req.params.id
 
     res.json({
@@ -40,7 +39,7 @@ app.get('/users/:id', (req, res) => {
 /**
   data เลขเป็น number -> ส่งผ่าน http (query string 100%) -> แปลงเเป็น number ใน logic
   ทำไมต้องแปลงเป็น string ก่อน เพราะ string = ภาษากลางที่เข้าใจง่ายสุด และสากลที่สุด เหมือนเป็นจุดคัดกรอง  **/
-app.get('/search', (req, res) => {
+router.get('/search', (req, res) => {
     let { name, age } = req.query
 
     //แปลง age => number
@@ -74,7 +73,7 @@ app.get('/search', (req, res) => {
 })
 
 //req.body and res.status
-app.post('/user', (req, res) => {
+router.post('/user', (req, res) => {
     const body = req.body
     
     res.status(HttpStatus.CREATED.code).json({
@@ -84,7 +83,7 @@ app.post('/user', (req, res) => {
 })
 
 //req.headers -> ใช้ กำหนด บริบท / กติกา / ตัวตน
-app.get('/headers', (req, res) => {
+router.get('/headers', (req, res) => {
     const userAgent = req.headers['user-agent']
 
     res.json({
@@ -93,10 +92,7 @@ app.get('/headers', (req, res) => {
     })
 })
 
-
-app.listen(port, () => {
-    console.log('http server run at ' + port)
-})
+module.exports = router;
 
 /**
 send - ส่งข้อความ

@@ -1,7 +1,6 @@
 const express = require('express')
-const app = express()
-const port = 8002
-const bodyparser = require('body-parser')
+const router = express.Router();
+// const bodyparser = require('body-parser')
 
 //text
 // app.use(bodyparser.text())
@@ -12,9 +11,10 @@ const bodyparser = require('body-parser')
 // global scope
 let users = []
 
-app.use(bodyparser.json())
+// router.use(bodyparser.json())
+
 // post json
-app.post('/user', (req, res) => {
+router.post('/user', (req, res) => {
     let user = req.body
     users.push(user)
     res.json({
@@ -25,7 +25,7 @@ app.post('/user', (req, res) => {
 
 // + post
 let counter = 1
-app.post('/userCounter', (req, res) => {
+router.post('/userCounter', (req, res) => {
     let userCounter = req.body
     userCounter.id = counter
     counter += 1
@@ -38,12 +38,12 @@ app.post('/userCounter', (req, res) => {
 })
 
 // get users
-app.get('/users', (req, res) => {
+router.get('/users', (req, res) => {
     res.json(users)
 })
 
 // put -> Replace All resource
-app.put('/user/:id', (req, res) => {
+router.put('/user/:id', (req, res) => {
     const id = Number(req.params.id)
     const index = users.findIndex(u => u.id === id)
 
@@ -64,7 +64,7 @@ app.put('/user/:id', (req, res) => {
 })
 
 //patch
-app.patch('/user/:id', (req, res) => {
+router.patch('/user/:id', (req, res) => {
     const id = Number(req.params.id)
     const index = users.findIndex(u => u.id === id)
 
@@ -84,8 +84,4 @@ app.patch('/user/:id', (req, res) => {
     res.send(id) 
 })
 
-// display cmd and connect port
-app.listen(port, (req, res) => {
-    console.log('http server run at '+ port)
-})
-
+module.exports = router;

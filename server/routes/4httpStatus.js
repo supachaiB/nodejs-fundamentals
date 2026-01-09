@@ -1,8 +1,8 @@
 const express = require('express')
-const app = express()
+const router = express.Router();
 const HttpStatus = require('../utils/httpStatus')
 
-app.use(express.json())
+router.use(express.json())
 
 let products = [
     { id: 1, name: "Pen"},
@@ -10,7 +10,7 @@ let products = [
 ]
 
 //200
-app.get('/products', (req, res) => {
+router.get('/products', (req, res) => {
     res.status(HttpStatus.OK.code).json({
         message: HttpStatus.OK.message,
         data: products
@@ -18,7 +18,7 @@ app.get('/products', (req, res) => {
 })
 
 //400 and 201
-app.post('/product', (req, res) => {
+router.post('/product', (req, res) => {
     const { name } = req.body
     // 400 check name
     if (!name) {
@@ -39,7 +39,7 @@ app.post('/product', (req, res) => {
 })
 
 //409 shot -> id
-app.put('/products/:id', (req, res) => {
+router.put('/products/:id', (req, res) => {
     const id = Number(req.params.id)
     const index = products.findIndex(p => p.id === id) 
 
@@ -53,9 +53,6 @@ app.put('/products/:id', (req, res) => {
     users[index] = updatedProduct
 })
 
-const port = 8003
-app.listen(port, () => {
-    console.log('http server run at '+ port)
-})
+module.exports = router;
 
 //422 ไม่ต้องใช้ก็ได้เพราะใช้ 409

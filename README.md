@@ -17,3 +17,10 @@ index.js
 
 if portfolio or true project
 ทำให้เป็น port เดียวจะดีกว่า
+
+# Middleware
+middleware ทำหน้าที่หลักคือ:
+- อนุญาต / ไม่อนุญาต
+- ตรวจข้อมูล
+- แปลงข้อมูล
+- จัดการ error
