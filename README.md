@@ -1,19 +1,31 @@
 # Node.js Fundamentals
-This repository contains my personal notes and examples
-while learning Node.js fundamentals.
+์เขียนด้วย NodeJS ใช้สำหรับอ่านทบทวนและใช้ฝึกงาน Tech Stack นี้ 
 
-## Topics
-Node.js core concepts
+## Tech Stack
+Node.js
 
-## Example
-index.js 
-รันที่ cmd ว่า node index.js 
-จะแสดง Server is running on + http + host + port 
+## Project Structure
+main folder "server"
 
-## port
-/hello -> express-hello 8000
-/index -> index.js functionality 7001
-/api -> rest-api 7002
+- controllers/
+    - user.controller.js //logic
+- middlewares/
+    - auth.middleware.js // ตรวจสอบ JWT
+    - logger.middleware.js
+- routes/
+    - 1index.js // เส้นทางของ user
+    - 2sentText.js
+    - 3restAPI.js
+    - 4httpStatus.js
+    - 5requestResponse.js
+    - 6user.routes.js
+utils/
+    - httpStatus
+- app.js // ตั้งค่า express และ middleware
+
+# Documentation
+- [controllers](docs/controllers.md)
+
 
 if portfolio or true project
 ทำให้เป็น port เดียวจะดีกว่า
