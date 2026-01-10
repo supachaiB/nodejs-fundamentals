@@ -19,7 +19,7 @@ Async จะทำงานได้ต้องพึ่ง Event Loop
 
 Event Loop แก้ปัญหา การบล็อค(Blocking) ของการทำงานแบบ Synchronous 
 
-โดย Event Loop จัดการงาน Asynchronous ทำให้โปรแกรมไม่ค้างรอ. 
+โดย <mark>Event Loop</mark> จัดการงาน Asynchronous ทำให้โปรแกรมไม่ค้างรอ. 
 
 Callback hell ในยุคก่อน async/await มีปัญหาที่
 - ซ้อนกันหลายชั้น
