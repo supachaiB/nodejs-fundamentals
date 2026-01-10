@@ -11,3 +11,5 @@ exports.profile = (req, res) => {
     res.json({ message: 'protected profile'})
 };
 ```
+Controller function ทำหน้าที่รับ request จาก client
+แล้วส่ง response กลับในรูปแบบ JSON

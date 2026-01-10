@@ -25,7 +25,9 @@ utils/
 
 ### Documentation
 - [controllers](docs/controllers.md)
-
+- [middlewares]
+- [routes]
+- [settingRoute]
 
 if portfolio or true project
 ทำให้เป็น port เดียวจะดีกว่า
