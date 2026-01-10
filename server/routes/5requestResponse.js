@@ -94,12 +94,3 @@ router.get('/headers', (req, res) => {
 
 module.exports = router;
 
-/**
-send - ส่งข้อความ
-body - ข้อมูลหลัก
-query - เงื่อนไข
-params - ชี้ resource
-status - ผลลัพธ์
-json - ส่งข้อมูล
-headers - บริบท
-**/
