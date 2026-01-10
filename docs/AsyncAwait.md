@@ -2,7 +2,7 @@
 async, await, non-blocking, promise, callback, event loop, try/catch, throw, express crash, unhandled rejection, global error handler, service
 
 ## Solve the problem
-`Synchronous` เป็นธรรมชาติของโค้ด โดยโค้ดรันทีละบรรทัด  
+<mark>Synchronous</mark> เป็นธรรมชาติของโค้ด โดยโค้ดรันทีละบรรทัด  
 - ถ้าเจองานมันจะต้องค่อย ๆ process ไป
 - ทีละอัน 1 ไป 2 ไป 3
 - server จะ หยุดรอ งานนี้นเสร็จก่อนถึงทำรรทัดต่อไป
@@ -29,7 +29,7 @@ getData(function(a){
 })
 ```
 **Promise** ถูกสร้างมาแก้ callback hell 
-```js .then().catch ``` ข้อดี
+`.then().catch` ข้อดี
 - อ่านง่ายขึ้น
 ``` js
 getData()
