@@ -15,6 +15,7 @@ json	- ส่งข้อมูลในรูปแบบ JSON
 
 headers	- บริบทของ request/response
 
+method - ดู request ว่ามาทำะไร
 
 ## ตัวอย่าง
 

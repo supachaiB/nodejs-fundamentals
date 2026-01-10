@@ -1,5 +1,6 @@
 # Node.js Fundamentals
-์เขียนด้วย NodeJS ใช้สำหรับอ่านทบทวนและใช้ฝึกงาน Tech Stack นี้ 
+์เขียนด้วย NodeJS ใช้สำหรับอ่านทบทวนและฝึกใช้
+งาน Tech Stack นี้ 
 
 ### Tech Stack
 Node.js
