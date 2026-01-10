@@ -1,10 +1,10 @@
 # Node.js Fundamentals
 ์เขียนด้วย NodeJS ใช้สำหรับอ่านทบทวนและใช้ฝึกงาน Tech Stack นี้ 
 
-## Tech Stack
+### Tech Stack
 Node.js
 
-## Project Structure
+### Project Structure
 main folder "server"
 
 - controllers/
@@ -23,7 +23,7 @@ utils/
     - httpStatus
 - app.js // ตั้งค่า express และ middleware
 
-# Documentation
+### Documentation
 - [controllers](docs/controllers.md)
 
 
