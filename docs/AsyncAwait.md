@@ -7,11 +7,19 @@ async, await, non-blocking, promise, callback, event loop, try/catch, throw, exp
 - ทีละอัน 1 ไป 2 ไป 3
 - server จะ หยุดรอ งานนี้นเสร็จก่อนถึงทำรรทัดต่อไป
 
+เรียกว่า Single Thread คือการทำงานของระบบที่ประมวลผลงานทีละอย่าง(one at a time) โดยใช้เธรด (Thread) เพียงชุดเดียวในกระบวนการ (Process) ทำให้ทำงานได้เรียงลำดับ
+
 ปัญหามันช้า ถ้าสเกลใหญ่ต้อง process นาน
 
 <mark>Asynchronous</mark> เปรียบเหมือน การแยกร่าง
 - โค้ด async สามารถ สั่งให้ทำงานพร้อมกันหลายงาน
 - <mark>await</mark> เหมือนเป็นตัวเบรคให้รอ ทำเฉพาะผลลัพธ์ของงานนั้นที่ต้องให้รอ แต่ server ทำงานอื่นได้
+
+Async จะทำงานได้ต้องพึ่ง Event Loop
+
+Event Loop แก้ปัญหา การบล็อค(Blocking) ของการทำงานแบบ Synchronous 
+
+โดย Event Loop จัดการงาน Asynchronous ทำให้โปรแกรมไม่ค้างรอ. 
 
 Callback hell ในยุคก่อน async/await มีปัญหาที่
 - ซ้อนกันหลายชั้น
