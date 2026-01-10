@@ -2,7 +2,7 @@
 async, await, non-blocking, promise, callback, event loop, try/catch, throw, express crash, unhandled rejection, global error handler, service
 
 ## Solve the problem
-Synchronous เป็นธรรมดาของโค้ดที่จะ โค้ดรันทีละบรรทัด  
+Synchronous เป็นธรรมชาติของโค้ดที่จะ โค้ดรันทีละบรรทัด  
 - ถ้าเจองานมันจะต้องค่อย ๆ process ไป
 - ทีละอัน 1 ไป 2 ไป 3
 - server จะ หยุดรอ งานนี้นเสร็จก่อนถึงทำรรทัดต่อไป
