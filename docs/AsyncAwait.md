@@ -9,9 +9,9 @@ async, await, non-blocking, promise, callback, event loop, try/catch, throw, exp
 
 ปัญหามันช้า ถ้าสเกลใหญ่ต้อง process นาน
 
-**Asynchronous** เปรียบเหมือน การแยกร่าง
+<mark>Asynchronous</mark> เปรียบเหมือน การแยกร่าง
 - โค้ด async สามารถ สั่งให้ทำงานพร้อมกันหลายงาน
-- **await** เหมือนเป็นตัวเบรคให้รอ ทำเฉพาะผลลัพธ์ของงานนั้นที่ต้องให้รอ แต่ server ทำงานอื่นได้
+- <mark>await</mark> เหมือนเป็นตัวเบรคให้รอ ทำเฉพาะผลลัพธ์ของงานนั้นที่ต้องให้รอ แต่ server ทำงานอื่นได้
 
 Callback hell ในยุคก่อน async/await มีปัญหาที่
 - ซ้อนกันหลายชั้น
@@ -28,7 +28,7 @@ getData(function(a){
     })
 })
 ```
-**Promise** ถูกสร้างมาแก้ callback hell 
+<mark>Promise</mark> ถูกสร้างมาแก้ callback hell 
 `.then().catch` ข้อดี
 - อ่านง่ายขึ้น
 ``` js
