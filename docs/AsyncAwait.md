@@ -52,9 +52,9 @@ callback = โค้ดที่ถูกผูกไว้กับ async task 
 
 
 ### Promise
-Callback hell ในยุคก่อน async/await มีปัญหาที่
-- ซ้อนกันหลายชั้น
-- อ่านยาก
+Callback hell ในยุคก่อน async/await มีปัญหาเรื่อง Inversion of Control + Flow Control
+- ไม่รู้ว่า -> Callback จะถูกเรียกกี่ครั้ง,ถูกเรียกไหม, ตอนไหน 
+- ซ้อนกันหลายชั้น อ่านยาก
 - maintain ยาก
 - error management ยาก
 ตัวอย่าง 
@@ -67,9 +67,13 @@ getData(function(a){
     })
 })
 ```
-<mark>Promise</mark> ถูกสร้างมาแก้ callback hell 
-`.then().catch` ข้อดี
-- อ่านง่ายขึ้น
+- nesting เพิ่มตาม logic
+- แก้ทีหลังยาก
+- ถ้าจะ error handing ต้องทำซ้ำทุกซ้ำ, ถ้าลืมชั้นหนึ่งจะเกิด bug
+- throw ใช้ไม่ได้ข้าม async boundary
+
+<mark>Promise</mark> ถูกสร้างมาแก้ปัญ หาเชิงโครงสร้างของ callback 
+
 ``` js
 getData()
     .then(a => getOtherData(a))
@@ -77,3 +81,7 @@ getData()
     .then(c => console.log(c))
     .catch(err => console.error(err));
 ```
+- flow ชัด
+- อ่านจากบนลงล่าง
+- error รวมศูนย์
+- chain แตกง่าย / refactor ง่าย
