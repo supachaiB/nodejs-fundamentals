@@ -1,5 +1,5 @@
 # meaning: Controllers
-Controller เก็บ logic ที่เกี่ยวกับ request กับ responsive ฝั่งของ backend
+Controller เก็บ logic ที่เกี่ยวกับ request กับ response ฝั่งของ backend
 
 - user.controller.js 
 ``` js

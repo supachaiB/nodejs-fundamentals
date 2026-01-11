@@ -1,4 +1,4 @@
-# Request and Responsive
+# Request and Response
 
 ## สรุปง่าย ๆ
 send	- ส่ง response กลับไปยัง client
