@@ -10,9 +10,9 @@
 - ปรับแต่งได้ตามต้องการ
 - เหมาะทั้งโปรเจกต์เล็กและโปรเจกต์ขนาดใหญ่
 
-## Express Core Fundamentals
+# Express Core Fundamentals
 
-### <mark>Routing</mark>
+## <mark>Routing</mark>
 
 คำศัพท์ที่มักทำให้สับสน:
 - routing
@@ -113,7 +113,8 @@ app.listen(3000, () => {
 
 
 
-# Request & Response
+ ## <mark>Request & Response</mark>
+
 
 <mark> Request & Response </mark>
 
@@ -162,7 +163,7 @@ app.listen(3000, () => {
 - import ไปใช้ใน `routes/httpStatus.js`
 
 
-<mark>Middleware</mark>
+## <mark>Middleware</mark>
 
 ## Middleware คืออะไร
 
@@ -189,5 +190,7 @@ app.use(logger)
 ```
 export ใช้
 
+
+-------------------
 
 
