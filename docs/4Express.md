@@ -33,28 +33,51 @@
 ใช้เรียกแทน **ระบบจัดการเส้นทางทั้งหมดของแอปพลิเคชัน**
 
 
-2. Route คือ "หนึ่งเส้นทาง" ที่ประกอบด้วย URL (Path) และ HTTP Method
+### 2. Route
+**Route** คือ *หนึ่งเส้นทาง*  
+ประกอบด้วย:
+- URL (Path)
+- HTTP Method
 
-ใช้ในโค้ดเพื่อระบุจุดรับส่งข้อมูลเฉพาะเจาะจง
+ใช้ในโค้ดเพื่อระบุจุดรับ–ส่งข้อมูลแบบเฉพาะเจาะจง
 
-ตัวอย่าง โค้ดนี้คือ 1 Route สำหรับหน้าแรก
-```js 
+
+**ตัวอย่าง: Route หน้าแรก**
+```js
 app.get('/', (req, res) => {
-    res.send('Home Page')
+  res.send('Home Page')
 })
 ```
 
-3. Routes เป็น "กลุ่มของเส้นทางทั้งหมด"
 
-มักใช้เป็นชื่อ Folder ใน Project (เช่น routes/) เพื่อเก็บไฟล์ Router ย่อย ๆ ทั้งหมด
+### Routes 
+**Routes** เป็น **กลุ่มของเส้นทาง (URL paths) ทั้งหมด** ในแอปพลิเคชัน  
+โดยทั่วไปมักใช้เป็นชื่อ **โฟลเดอร์** ในโปรเจกต์ (เช่น `routes/`)  
+เพื่อเก็บไฟล์ Router ย่อย ๆ แยกตามหน้าที่ของระบบ
 
-4. Router เป็น "เครื่องมือ" ที่ Express ให้มาเพื่อใช้แยก Route ออกเป็นกลุ่มๆ หรือเป็นไฟล์ย่อยๆ เพื่อความสะอาดของโค้ด
 
-ใช้เมื่อโปรเจกต์เริ่มใหญ่ขึ้น แล้วเราต้องการแยก Route ของ User, Product, หรือ Order ออกจากกันคนละไฟล์
 
-ตัวอย่างการใช้ เช่น Project ใหญ่ขึ้น app.js จะเป็นศูนย์รวมของ Route ในการกำหนดเส้นทาง ฉะนั้น Router จึงบทบาทในการเป็นตัวไปต่อเชื่อมกับ Route ทั้งหมดที่จะมาต่อ app.js
+## Router
+**Router** คือ “เครื่องมือ” ที่ Express.js เพื่อใช้ **แยก Route ออกเป็นกลุ่มหรือเป็นไฟล์ย่อย**  
+ช่วยให้โค้ดสะอาด อ่านง่าย และดูแลรักษาได้ง่ายขึ้น
 
-ไฟล์ย่อย `routes/2sentText.js`
+## ใช้ Router เมื่อ
+ใช้เมื่อ:
+- โปรเจกต์เริ่มใหญ่ขึ้น
+- มี Route หลายกลุ่ม เช่น User, Product, Order
+- ไม่ต้องการให้ `app.js` ยาวและรกเกินไป
+
+Router จะช่วยแยกความรับผิดชอบของแต่ละ Route ออกเป็นคนละไฟล์
+
+## แนวคิด Router
+- `app.js` ทำหน้าที่เป็น **ศูนย์กลางของแอป** 
+- Router แต่ละไฟล์ ทำหน้าที่จัดการ Route ของตัวเองแล้ว export Router
+- `app.js` จะ import Router เหล่านี้มาเชื่อมต่อเข้าด้วยกัน
+
+
+
+## ตัวอย่าง `routes/2sentText.js`
+
 ``` js 
 const express = require('express')
 const router = express.Router();
@@ -88,39 +111,69 @@ app.listen(3000, () => {
 });
 ```
 
+
+
+# Request & Response
+
 <mark> Request & Response </mark>
 
-send	- ส่ง response กลับไปยัง client
+- **send**  
+  ส่ง response กลับไปยัง client
 
-body	- ข้อมูลหลักที่ client ส่งมา
+- **body**  
+  ข้อมูลหลักที่ client ส่งมา (เช่น form, JSON)
 
-query	- เงื่อนไข / ตัวเลือกเพิ่มเติม
+- **query**  
+  เงื่อนไขหรือตัวเลือกเพิ่มเติมที่มากับ URL  
+  ตัวอย่าง: `/users?page=1`
 
-params	- ตัวชี้ resource ใน URL
+- **params**  
+  ตัวชี้ resource ใน URL  
+  ตัวอย่าง: `/users/:id`
 
-status	- ผลลัพธ์ของ request
+- **status**  
+  ผลลัพธ์ของ request (HTTP Status Code)
 
-json	- ส่งข้อมูลในรูปแบบ JSON
+- **json**  
+  ส่งข้อมูลกลับในรูปแบบ JSON
 
-headers	- บริบทของ request/response
+- **headers**  
+  บริบทของ request / response  
+  เช่น token, content-type
 
-method - ดู request ว่ามาทำะไร
+- **method**  
+  ดูว่า request มาทำอะไร  
+  เช่น `GET`, `POST`, `PUT`, `DELETE`
+
 
 <mark> Example </mark>
 
-เราจะเก็บ ค่าของ httpStatus ไว้ที่ utils
+## การจัดเก็บ httpStatus
 
-เพราะ uitls มีไอเดียเป็นที่เก็บฟังก์ชั่นหรือค่าที่ใช้ซ้ำ และ ไม่ถูกกับ business logic ใดเฉพาะ
+เราจะเก็บค่าของ `httpStatus` ไว้ที่ `utils`  
 
-utils/httpStatus.js --> นำไปใช้งาน routes/4httpStatus.js
+**เหตุผล**
+- `utils` มีแนวคิดเป็นที่เก็บฟังก์ชันหรือค่าที่ใช้ซ้ำ
+- ไม่ผูกกับ business logic ใดเป็นการเฉพาะ
+- ทำให้โค้ดอ่านง่าย และดูเป็นระบบ
+
+### การนำไปใช้งาน
+- ประกาศค่าที่ใช้ซ้ำใน `utils/httpStatus.js`
+- import ไปใช้ใน `routes/httpStatus.js`
 
 
-<mark> Middleware </mark>
-Middleware คือฟังก์ชันที่ทำงานทุกครั้งที่มี request เข้ามา
-เพื่อจัดการหรือกรอง request ก่อนจะไปถึง controller
+<mark>Middleware</mark>
 
-logger.middleware.js
-``` js
+## Middleware คืออะไร
+
+Middleware คือ **ฟังก์ชันที่ทำงานทุกครั้งที่มี request เข้ามา**  
+ทำหน้าที่จัดการหรือกรอง request **ก่อนจะไปถึง controller**
+
+
+## ตัวอย่าง: Logger Middleware
+
+### logger.middleware.js
+```js
 module.exports = (req, res, next) => {
   console.log(req.method, req.url);
   next();
