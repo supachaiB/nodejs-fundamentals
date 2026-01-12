@@ -17,8 +17,8 @@ app.use('/sent-text', sentText);
 app.use('/rest', restAPI);
 app.use('/status', testStatus);
 app.use('/req-res', requestResponse);
-app.use('/users', userRouter)
-app.use('/async', asyncAwait)
+app.use('/users', userRouter);
+app.use('/async', asyncAwait);
 
 app.listen(3000, () => {
   console.log('Server running');
