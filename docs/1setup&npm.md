@@ -22,10 +22,10 @@ Layers ของโลก Software Development
     - หน้าที่ เป็นฐานรากที่ทำให้แอปพลิเคชันสามารถถูกพัฒนาและติดตั้งใช้งานได้บนอุปกรณ์และระบบต่างๆ ทั้งฮาร์ดแวร์และระบบปฏิบัติการและไลบรารีซอฟต์แวร์ต(Cross-Platform). และไลบรารีซอฟต์แวร์ต
     - ตัวอย่าง ทั้งฮาร์ดแวร์และระบบปฏิบัติที่เกี่ยวข้อง. 
     
-    เช่น Windows, Linux, macOS, Android, iOS, Web (Browser). 
+        เช่น Windows, Linux, macOS, Android, iOS, Web (Browser). 
     - ตัวอย่าง ไลบรารีซอฟต์แวร์ต
 
-    เช่น Windows มี .NET Framework, Windows API.
+        เช่น Windows มี .NET Framework, Windows API.
 - Runtime Environment คือส่วนที่ใช้ในการแปลและรันโค้ดของภาษาโปรแกรม 
 
 ### Javascript Layer ล่ะ
