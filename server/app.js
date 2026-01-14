@@ -9,10 +9,11 @@ app.use(express.json());
 //รับข้อมูล HTML Form
 app.use(express.urlencoded({ extended: true }))
 
-// เชื่อมต่อฐานข้อมูล
+// เชื่อมต่อฐานข้อมูล mongoDB
 require('dotenv').config();
 const connectDB = require('./config/db');
 connectDB();
+
 
 // user routes
 const users = require('./routes/users.routes');

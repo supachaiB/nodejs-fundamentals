@@ -1,33 +1,3 @@
-# ไฟล์เดอร์หลัก
-- client
-- docs
-- server
-
-# git 
-gitifnore
-# โครงสร้างโปรเจกต์ (Structure) และการใช้งาน Git
-
-ไฟล์นี้สรุปโครงสร้างโฟลเดอร์ที่แนะนำสำหรับโปรเจกต์ Node.js ขนาดเล็ก-กลาง พร้อมคำแนะนำการตั้งค่า Git และไฟล์ที่ควรละเว้นจากรีโพ (gitignore)
-
----
-
-## โฟลเดอร์หลัก (แนะนำ)
-- `client/`  — โค้ดฝั่ง frontend (HTML/CSS/JS หรือโปรเจกต์ React/Vue)
-- `server/`  — โค้ดฝั่ง backend (Express, API, server-side logic)
-  - `server/app.js` หรือ `server/index.js` — entry point
-  - `server/config/` — config เช่น database, passport, environment helpers
-  - `server/models/` — Mongoose / ORM models
-  - `server/controllers/` — controller / business logic
-  - `server/routes/` — route definitions
-  - `server/middlewares/` — custom middleware
-  - `server/services/` — service layer (optional)
-  - `server/utils/` — helpers และ constants
-- `docs/`    — เอกสาร project, how-to, cheatsheets
-- `public/`  — ไฟล์ static ที่เสิร์ฟ (รูป, css, client js) — ถ้าไม่มี `client/`
-- `tests/`   — unit / integration tests
-- `scripts/` — helper scripts (เช่น สร้างข้อมูลตัวอย่าง)
-- `README.md`, `package.json`, `.gitignore`, `LICENSE`, `.env.example`
-
 ตัวอย่างโครงแบบย่อ
 ```
 project-root/
@@ -48,57 +18,92 @@ project-root/
 
 ---
 
-## .gitignore ที่แนะนำ (ตัวอย่าง)
-- `node_modules/`
-- `.env` (เก็บความลับไว้ในเครื่อง ห้าม commit)
-- `dist/` หรือ `build/` (ไฟล์ build)
-- `*.log`
-- `coverage/`
-- `/.vscode`
-- `npm-debug.log` หรือ `yarn-error.log`
+# โครงสร้างโปรเจกต์ (แนะนำ)
 
-สร้างไฟล์ `.env.example` ไว้เป็นตัวอย่างคีย์ที่ต้องตั้ง แต่ไม่เก็บค่าจริง
+ต่อไปนี้เป็นตัวอย่างโครงสร้างโปรเจกต์ที่ปรับให้รองรับทั้ง MongoDB และ PostgreSQL โดยแยกส่วนให้ชัดเจนเพื่อไม่ให้สับสน
+
+```
+project-root/
+├─ client/                  # frontend (static หรือ SPA)
+├─ server/
+│  ├─ config/
+│  │  ├─ mongo.js           # การเชื่อมต่อ mongoose (Mongo)
+│  │  └─ postgres.js        # การเชื่อมต่อ pg (Postgres)
+│  ├─ models/
+│  │  ├─ mongo/             # Mongoose models
+│  │  │  └─ user.model.js
+│  │  └─ pg/                # Postgres models (raw SQL หรือ wrapper)
+│  │     └─ user.model.js
+│  ├─ controllers/
+│  │  ├─ mongo/
+│  │  └─ pg/
+│  ├─ routes/
+│  │  ├─ mongo/
+│  │  └─ pg/
+│  ├─ middlewares/
+│  └─ app.js
+├─ db/
+│  ├─ migrations/           # เก็บไฟล์ SQL migration เช่น 001_create_users.sql
+│  └─ seeds/                # (ถ้ามี) ข้อมูลตัวอย่างสำหรับ dev
+├─ docs/
+├─ public/                  # static files ที่เสิร์ฟผ่าน express.static
+├─ tests/
+├─ .env                     # เก็บตัวแปรสภาพแวดล้อม (ไม่ควร commit)
+├─ .gitignore
+├─ package.json
+└─ README.md
+```
+
+สรุปตำแหน่งสำคัญและแนวปฏิบัติ
+
+- `server/config/postgres.js` — เก็บการตั้งค่าเชื่อมต่อ Postgres (ใช้ `pg` และอ่านค่า `POSTGRES_URL` จาก `.env`).
+- `server/models/pg/` — เก็บฟังก์ชันที่รัน SQL หรือเรียกใช้ pool.query() เพื่อแยกจาก Mongoose models
+- `db/migrations/` — เก็บ schema SQL (Create table, alter table) เพื่อให้สามารถรันซ้ำหรือแชร์กับทีมได้
+- `server/routes/pg/` และ `server/controllers/pg/` — แยก API ของ Postgres ภายใต้ path เช่น `/api/pg/...` เพื่อให้ชัดเจน
+
+ตัวอย่างไฟล์ที่ควรมี (สั้น ๆ)
+- `.env` (ตัวอย่าง)
+```
+# Mongo
+MONGO_URI=mongodb://user:pass@localhost:27017/mydb
+
+# Postgres
+POSTGRES_URL=postgres://pguser:pgpass@localhost:5432/mydb
+
+PORT=3000
+```
+
+- `.gitignore` (แนะนำ)
+```
+node_modules/
+.env
+.DS_Store
+npm-debug.log
+.vscode/
+```
+
+Git & workflow (แนะนำแบบสั้น)
+- Branching: ใช้ `main` สำหรับ production, `develop` สำหรับรวมงาน, `feature/*` สำหรับงานย่อย
+- Commit: ข้อความสั้นแบบหมายเหตุ เช่น `feat: add pg user model` หรือ `fix: validate email` (ตาม convention แบบง่าย)
+- Pull request: ให้อธิบายสั้น ๆ ว่าทำอะไรและวิธีทดสอบ
+
+การรัน migration / เตรียม DB (ไม่เขียนโค้ด)
+- สร้างฐานข้อมูล (ตัวอย่างเครื่องมือ GUI เช่น pgAdmin หรือ psql): สร้าง database `mydb`
+- รันไฟล์ SQL ใน `db/migrations/` ด้วย pgAdmin หรือ psql:
+  - pgAdmin: เปิด Query Tool แล้วรันไฟล์
+  - psql (terminal): `psql -d mydb -f db/migrations/001_create_users.sql`
+
+การทดสอบแบบ Local
+- ตั้งค่า `.env` ให้ชี้ไปยัง DB local
+- สตาร์ท server: `npm start` (หรือ `node server/app.js`)
+- เรียก API ของ Postgres เช่น `GET /api/pg/users` เพื่อตรวจสอบ
+
+คำแนะนำเพิ่มเติม
+- แยกไฟล์ config สำหรับแต่ละ DB เพื่อให้ง่ายต่อการสลับ/ปิด-เปิด
+- ถ้าต้องการ abstraction สูงขึ้น ให้พิจารณาใช้ Prisma (SQL) หรือ query builder เช่น Knex
+- เก็บ migration และ seed ไฟล์ไว้ใน `db/` เพื่อให้ง่ายต่อการ deploy และ backup
 
 ---
 
-## การจัดการ Environment
-- เก็บค่า sensitive ใน `.env` แต่ไม่ commit ขึ้น repo
-- เพิ่ม `.env` ใน `.gitignore`
-- ให้มี `.env.example` เพื่ออธิบายตัวแปรที่จำเป็น (เช่น `MONGO_URI`, `PORT`)
+ไฟล์นี้สรุปโครงสร้างและแนวปฏิบัติพื้นฐาน เพื่อให้คุณเริ่มเพิ่ม Postgres ในโปรเจกต์ได้อย่างเป็นระบบและไม่สับสนกับ MongoDB.
 
----
-
-## Git workflow ที่แนะนำ (ง่ายและปฎิบัติได้จริง)
-- สาขาหลัก: `main` (หรือ `master`) — เก็บโค้ดที่ deploy ได้
-- สาขาพัฒนา: `develop` (ถ้าต้องการ) — รวบรวม feature ก่อน merge ไป `main`
-- สาขาย่อย: `feature/<ชื่อ>`, `fix/<issue-id>`, `chore/<what>`
-- ใช้ Pull Requests (PR) เมื่อจะ merge เข้าสาขาหลัก — ให้มี code review
-
-Commit message style (สั้น ๆ และมีมาตรฐาน):
-- แนะนำใช้ Conventional Commits
-  - `feat: เพิ่มฟีเจอร์ X`
-  - `fix: แก้บั๊ก Y`
-  - `chore: อัปเดต dependency`
-
----
-
-## คำสั่ง Git พื้นฐาน (ตัวอย่าง)
-- เริ่มต้น repo: `git init`
-- ดึงล่าสุด: `git pull origin main`
-- สร้างสาขาใหม่: `git checkout -b feature/login`
-- เพิ่มไฟล์: `git add .`
-- commit: `git commit -m "feat: add login route"`
-- push: `git push origin feature/login`
-- merge ผ่าน PR หรือ `git merge` ตาม workflow
-
----
-
-## ข้อแนะนำเพิ่มเติม
-- ใส่ README ชัดเจน: วิธีติดตั้ง, คำสั่งรัน, ตัวแปร env ที่ต้องตั้ง
-- แยกไฟล์ config ตาม environment (development/test/production) หรือใช้ env vars
-- ตั้ง `.editorconfig` และ `prettier`/`eslint` เพื่อความสม่ำเสมอของโค้ด
-- หลีกเลี่ยงการ commit secret/password — ใช้ secret manager ใน production
-
----
-
-ไฟล์นี้เป็นเกณฑ์พื้นฐานที่ปฏิบัติได้จริงสำหรับโปรเจกต์ Node.js ขนาดเล็กถึงกลาง ถ้าต้องการผมช่วยสร้าง `.gitignore`, `.env.example`, และตัวอย่าง README ให้ใน workspace ได้เลย แจ้งมาได้.
