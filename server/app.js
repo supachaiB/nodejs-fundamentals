@@ -9,6 +9,15 @@ app.use(express.json());
 //รับข้อมูล HTML Form
 app.use(express.urlencoded({ extended: true }))
 
+// เชื่อมต่อฐานข้อมูล
+require('dotenv').config();
+const connectDB = require('./config/db');
+connectDB();
+
+// user routes
+const users = require('./routes/users.routes');
+app.use('/api/users', users);
+
 
 // import route modules
 const sentText = require('./routes/2sentText');
